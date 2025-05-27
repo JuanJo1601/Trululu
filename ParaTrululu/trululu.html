@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tengo Novia ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 192, 203, 0.7);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-10vh) rotate(180deg); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            color: #d63384;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d63384, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #6f42c1;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .kiss-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+            border: 3px solid rgba(255, 105, 180, 0.3);
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: #d63384;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .section-description {
+            font-size: 1.2rem;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .photo-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d63384;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 2px dashed #ff69b4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder::before {
+            content: '📸';
+            font-size: 4rem;
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .photo-caption {
+            text-align: center;
+            color: #6f42c1;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .love-message {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .love-text {
+            font-size: 1.3rem;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            font-size: 1.1rem;
+            color: #d63384;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .decorative-elements {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3));
+            animation: spin 10s linear infinite;
+        }
+        
+        .element-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .element-2 { top: 20%; right: 15%; animation-delay: 2s; }
+        .element-3 { bottom: 20%; left: 20%; animation-delay: 4s; }
+        .element-4 { bottom: 10%; right: 10%; animation-delay: 6s; }
+        
+        .memories-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .memory-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(45deg, rgba(255, 182, 193, 0.2), rgba(255, 240, 245, 0.2));
+            border-radius: 15px;
+            border-left: 4px solid #ff69b4;
+        }
+        
+        .memory-text {
+            font-size: 1.1rem;
+            color: #495057;
+            font-style: italic;
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        
+        .interactive-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        .surprise-message {
+            display: none;
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .surprise-message.show {
+            display: block;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .qr-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #6f42c1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .qr-info {
+                position: relative;
+                margin: 20px auto;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="decorative-elements element-1"></div>
+    <div class="decorative-elements element-2"></div>
+    <div class="decorative-elements element-3"></div>
+    <div class="decorative-elements element-4"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">❤️ TENGO NOVIA ❤️</h1>
+            <p class="subtitle">La mujer más hermosa del mundo 💕</p>
+        </header>
+        
+        <div class="kiss-section">
+            <h2 class="section-title">Sus besos me hacen sentir muy querido 💋</h2>
+            <p class="section-description">Cada recuerdo suyo es un recordatorio de lo especial que soy para ella. Me hacen sentir amado, querido y completo. ✨</p>
+            <button class="interactive-btn" onclick="showSurprise()">💋 Besito para mi novia 💋</button>
+            <div class="surprise-message" id="surpriseMsg">
+                <h3>💋 ¡Beso enviado con amor! 💋</h3>
+                <p>Beso directo a su corazón 💖</p>
+            </div>
+        </div>
+        
+        <div class="gallery">
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <div style="text-align: center; z-index: 2; position: relative;">
+                        <strong>Besitos con MI NOVIA</strong><br>
+                        <img src="besito2.jpeg"width="400" height="470">
+                    </div>
+                </div>
+                <p class="photo-caption">Cada besito me enamora más❤️</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <div style="text-align: center; z-index: 2; position: relative;">
+                        <strong>Mi bebe linda</strong><br>
+                        <img src="bebelulu.jpeg" width="400" height="450">
+                    </div>
+                </div>
+                <p class="photo-caption">La bebe más bonita del mundo 💕</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <div style="text-align: center; z-index: 2; position: relative;">
+                        <strong>Colitas lindas</strong><br>
+                        <img src="colita.jpeg"width="400" height="470">
+                    </div>
+                </div>
+                <p class="photo-caption">Las colitas más lindas 😊</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <div style="text-align: center; z-index: 2; position: relative;">
+                        <strong>Locuras juntos</strong><br>
+                            <video autoplay muted loop width="100%">
+                            <source src="videoChistoso.mp4" type="video/mp4" width="370" height="420">
+                        </video>
+                        <small>Somos muy loquitos 🌟</small>
+                    </div>
+                </div>
+                <p class="photo-caption">Recuerdos inolvidables 🌍</p>
+            </div>
+        </div>
+        
+        <div class="memories-section">
+            <h2 class="section-title">Cosas que te quiero decir</h2>
+            <div class="memory-item">
+                <p class="memory-text">"Cada que te veo me vuelvo loco por ti más y más 💘"</p>
+            </div>
+            <div class="memory-item">
+                <p class="memory-text">"Cada que nos vemos es mi momento favorito del dia✨"</p>
+            </div>
+            <div class="memory-item">
+                <p class="memory-text">"Cada día contigo es una nueva aventura 🦋"</p>
+            </div>
+            <div class="memory-item">
+                <p class="memory-text">"Eres mi persona favorita en todo el mundo 🌎"</p>
+            </div>
+        </div>
+        
+        <div class="love-message">
+            <p class="love-text">
+                En este tiempo que llevamos juntos no puedo explicar lo feliz
+                y afortunado que me siento el poder estar contigo en cada momento,
+                Novia te quiero como no tienes idea.
+            </p>
+            <p class="love-text">
+                Voy a ser el mejor novio para ti, para que nunca te falte nada
+                quiero darte lo mejor de mi y ewsforzarme para que seas feliz
+                y siempre píenses en mi, Mi Trululu te quiero.
+            </p>
+            <button class="interactive-btn" onclick="showLoveMessage()">💖 Mensaje especial 💖</button>
+            <div class="surprise-message" id="loveMsg">
+                <h3>💖 Para el amor de mi vida 💖</h3>
+                <p>Eres perfecta tal como eres💫</p>
+            </div>
+            <p class="signature">Con todo mi cariño 💖</p>
+        </div>
+    </div>
+    
+    <script>
+        // Crear corazones flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const hearts = ['❤️', '💖', '💕', '💝', '💗', '💘'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // Crear corazones cada cierto tiempo
+        setInterval(createHeart, 800);
+        
+        // Efecto de click en las tarjetas
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'pulse 0.6s ease-in-out';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 600);
+            });
+        });
+        
+        // Función para mostrar mensaje sorpresa
+        function showSurprise() {
+            const msg = document.getElementById('surpriseMsg');
+            msg.classList.add('show');
+            
+            // Crear efecto de corazones extra
+            for(let i = 0; i < 10; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            
+            setTimeout(() => {
+                msg.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Función para mostrar mensaje de amor
+        function showLoveMessage() {
+            const msg = document.getElementById('loveMsg');
+            msg.classList.add('show');
+            
+            // Crear muchos corazones
+            for(let i = 0; i < 15; i++) {
+                setTimeout(createHeart, i * 80);
+            }
+            
+            setTimeout(() => {
+                msg.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Mensaje de bienvenida
+        setTimeout(() => {
+            console.log('💖 Página creada con amor para Trululu 💖');
+        }, 1000);
+        
+        // Efecto especial al cargar la página
+        window.addEventListener('load', function() {
+            // Crear corazones iniciales
+            for(let i = 0; i < 5; i++) {
+                setTimeout(createHeart, i * 200);
+            }
+        });
+    </script>
+</body>
+</html>
